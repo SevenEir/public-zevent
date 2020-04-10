@@ -11,23 +11,26 @@ public class PublicEventItemDTO {
         return name;
     }
 
-    public void setName(String name) {
+    public PublicEventItemDTO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Date getInitDate() {
         return initDate;
     }
 
-    public void setInitDate(Date initDate) {
+    public PublicEventItemDTO setInitDate(Date initDate) {
         this.initDate = initDate;
+        return this;
     }
 
     public int getSeats() {
         return seats;
     }
 
-    public void setSeats(int seats) {
+    public PublicEventItemDTO setSeats(int seats) {
         this.seats = seats;
+        return this;
     }
 }
