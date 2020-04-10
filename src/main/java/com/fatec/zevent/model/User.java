@@ -1,11 +1,20 @@
 package com.fatec.zevent.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fatec.zevent.model.enumeration.GenderEnum;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
 
+@Document(collection = "users")
 public class User {
+
+    @JsonSerialize(using = ToStringSerializer.class)
+    @Id
+    private String id;
     private String name;
     private Date birthday;
     private String role;

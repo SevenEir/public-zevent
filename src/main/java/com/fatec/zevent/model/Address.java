@@ -1,20 +1,36 @@
 package com.fatec.zevent.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Address {
-    private int postalCode;
+
+    @NotNull(message = "Organization's postal code must not be null")
+    private String postalCode;
+
+    @NotNull(message = "Organization's country must not be null")
     private String country;
+
+    @NotNull(message = "Organization's state must not be null")
     private String state;
+
+    @NotNull(message = "Organization's city must not be null")
     private String city;
+
+    @NotNull(message = "Organization's neighborhood must not be null")
     private String neighborhood;
+
+    @NotNull(message = "Organization's street must not be null")
     private String street;
+
+    @NotNull(message = "Organization's number must not be null")
     private String number;
     private String complement;
 
-    public int getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public Address setPostalCode(int postalCode) {
+    public Address setPostalCode(String postalCode) {
         this.postalCode = postalCode;
         return this;
     }

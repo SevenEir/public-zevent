@@ -1,10 +1,22 @@
 package com.fatec.zevent.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Organization {
+
+    @NotNull(message = "Organization's social reason must not be null")
     private String socialReason;
+
+    @NotNull(message = "Organization's fantasy name must not be null")
     private String fantasyName;
-    private int CNPJ;
+
+    @NotNull(message = "Organization's CNPJ must not be null")
+    private String CNPJ;
+
+    @NotNull(message = "Organization's actuation area must not be null")
     private String actuationArea;
+
+    @NotNull(message = "Organization's address must not be null")
     private Address address;
 
     public String getSocialReason() {
@@ -25,11 +37,11 @@ public class Organization {
         return this;
     }
 
-    public int getCNPJ() {
+    public String getCNPJ() {
         return CNPJ;
     }
 
-    public Organization setCNPJ(int CNPJ) {
+    public Organization setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
         return this;
     }

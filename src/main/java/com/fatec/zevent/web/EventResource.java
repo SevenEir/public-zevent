@@ -5,10 +5,12 @@ import com.fatec.zevent.controller.EventController;
 import com.fatec.zevent.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -34,4 +36,17 @@ public class EventResource {
         return ResponseEntity.ok().body(events);
     }
 
+    /**
+     * {@code POST  /event} : create new event.
+     *
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and the event created.
+     */
+    @PostMapping("/event")
+    public ResponseEntity<Event> createEvent(@Valid @RequestBody Event event) throws URISyntaxException {
+        if(event.getId() != null) {
+            return ResponseEntity.badRequest().body(event);
+        }
+        Event savedEvent = eventController.createEvent(event);
+        return ResponseEntity.created(new URI("/api/event/" + savedEvent.getId())).body(savedEvent);
+    }
 }

@@ -5,30 +5,56 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fatec.zevent.model.enumeration.CategoryEnum;
 import com.fatec.zevent.model.enumeration.EventStatusEnum;
 import com.fatec.zevent.model.enumeration.EventTypeEnum;
+import com.mongodb.lang.NonNull;
+import com.mongodb.lang.Nullable;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "event")
+@Document(collection = "events")
 public class Event implements Checkable {
 
     @JsonSerialize(using = ToStringSerializer.class)
     @Id
     private String id;
+
+    @NotNull(message = "Event's name must not be null")
     private String name;
+
+    @NotNull(message = "Event's category must not be null")
     private CategoryEnum category;
+
+    @NotNull(message = "Event's type must not be null")
     private EventTypeEnum type;
+
+    @NotNull(message = "Event's desc must not be null")
     private String desc;
+
+    @NotNull(message = "Event's initDate must not be null")
     private Date initDate;
+
+    @NotNull(message = "Event's finishDate must not be null")
     private Date finishDate;
+
+    @NotNull(message = "Event's value must not be null")
     private double value;
-    private EventStatusEnum status;
+
+    @NotNull(message = "Event's seats must not be null")
+    @Range(min = 1)
     private int seats;
-    private User responsible;
+
+    @NotNull(message = "Event's organization must not be null")
     private Organization organization;
+
+    @NotNull(message = "Event's address must not be null")
     private Address address;
+
+    private EventStatusEnum status;
+    private User responsible;
     private List<Activity> activities;
     private List<Stand> stands;
     private List<ActivityType> activityTypes;
