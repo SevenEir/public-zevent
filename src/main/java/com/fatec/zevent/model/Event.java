@@ -24,6 +24,25 @@ public class Event {
     private Date finishDate;
     private double value;
     private EventStatusEnum status;
+    private int seats;
+
+    public String getId() {
+        return id;
+    }
+
+    public Event setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public Event setSeats(int seats) {
+        this.seats = seats;
+        return this;
+    }
 
     public CategoryEnum getCategory() {
         return category;

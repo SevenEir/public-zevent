@@ -1,5 +1,6 @@
 package com.fatec.zevent.web;
 
+import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
 import com.fatec.zevent.controller.EventController;
 import com.fatec.zevent.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,10 @@ public class EventResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of public events in body.
      */
-    @GetMapping("/event")
-    public ResponseEntity<List<Event>> getAllEvents() {
+    @GetMapping("/public-event")
+    public ResponseEntity<List<PublicEventItemDTO>> getAllPublicEvents() {
         System.out.println("REST request to get all the public events");
-        List<Event> events = eventController.getAllPublicEvents();
+        List<PublicEventItemDTO> events = eventController.getAllPublicEvents();
         return ResponseEntity.ok().body(events);
     }
 
