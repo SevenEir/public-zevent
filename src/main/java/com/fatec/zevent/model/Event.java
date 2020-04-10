@@ -1,4 +1,4 @@
-package br.com.fatec.zevent;
+package com.fatec.zevent.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
