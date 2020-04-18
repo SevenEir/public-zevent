@@ -55,7 +55,6 @@ public class Event implements Checkable {
 
     private EventStatusEnum status;
     private User responsible;
-    private List<Activity> activities;
     private List<Stand> stands;
     private List<ActivityType> activityTypes;
     private List<Comment> comments;
@@ -156,15 +155,6 @@ public class Event implements Checkable {
 
     public Event setOrganization(Organization organization) {
         this.organization = organization;
-        return this;
-    }
-
-    public List<Activity> getActivities() {
-        return activities;
-    }
-
-    public Event setActivities(List<Activity> activities) {
-        this.activities = activities;
         return this;
     }
 

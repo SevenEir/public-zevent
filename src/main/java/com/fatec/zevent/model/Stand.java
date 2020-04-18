@@ -2,12 +2,25 @@ package com.fatec.zevent.model;
 
 import com.fatec.zevent.model.enumeration.CategoryEnum;
 
+import javax.validation.constraints.NotNull;
+
 public class Stand implements Checkable {
+
+    @NotNull(message = "Stand's name must not be null")
     private String name;
+
+    @NotNull(message = "Stand's category must not be null")
     private CategoryEnum category;
+
+    @NotNull(message = "Stand's description must not be null")
     private String desc;
+
+    @NotNull(message = "Stand's points must not be null")
     private int points;
+
+    @NotNull(message = "Stand's organization must not be null")
     private Organization organization;
+
     private User responsible;
 
     public String getName() {
