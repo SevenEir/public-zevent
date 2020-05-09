@@ -1,8 +1,10 @@
 package com.fatec.zevent.web;
 
+import com.fatec.zevent.DAO.EventDAO;
 import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
-import com.fatec.zevent.controller.EventController;
+import com.fatec.zevent.service.IEventService;
 import com.fatec.zevent.model.Event;
+import com.fatec.zevent.utils.ObjectGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +21,7 @@ import java.util.Optional;
 public class EventResource {
 
     @Autowired
-    private final EventController eventController;
-
-    public EventResource() {
-        this.eventController = new EventController();
-    }
+    private IEventService eventService;
 
     /**
      * {@code GET  /event} : get all the public events.
@@ -33,7 +31,7 @@ public class EventResource {
     @GetMapping("/public-event")
     public ResponseEntity<List<PublicEventItemDTO>> getAllPublicEvents() {
         System.out.println("REST request to get all the public events");
-        List<PublicEventItemDTO> events = eventController.getAllPublicEvents();
+        List<PublicEventItemDTO> events = eventService.getAllPublicEvents();
         return ResponseEntity.ok().body(events);
     }
 
@@ -47,7 +45,7 @@ public class EventResource {
         if(event.getId() != null) {
             return ResponseEntity.badRequest().body(event);
         }
-        Event savedEvent = eventController.createEvent(event);
+        Event savedEvent = eventService.createEvent(event);
         return ResponseEntity.created(new URI("/api/event/" + savedEvent.getId())).body(savedEvent);
     }
 
@@ -59,7 +57,7 @@ public class EventResource {
     @GetMapping("/public-event/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable String id) {
         System.out.println("REST request to get event detail");
-        Optional<Event> event = eventController.getEventById(id);
+        Optional<Event> event = eventService.getEventById(id);
         return event.map(value -> ResponseEntity.ok().body(value))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }

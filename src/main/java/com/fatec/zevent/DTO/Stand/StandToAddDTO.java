@@ -1,4 +1,4 @@
-package com.fatec.zevent.DTO;
+package com.fatec.zevent.DTO.Stand;
 
 import com.fatec.zevent.model.Stand;
 

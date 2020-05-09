@@ -12,6 +12,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,11 +54,11 @@ public class Event implements Checkable {
     @NotNull(message = "Event's address must not be null")
     private Address address;
 
-    private EventStatusEnum status;
+    private EventStatusEnum status = EventStatusEnum.OPEN;
     private User responsible;
-    private List<Stand> stands;
-    private List<ActivityType> activityTypes;
-    private List<Comment> comments;
+    private List<Stand> stands = new ArrayList<>();
+    private List<ActivityType> activityTypes = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public String getId() {
         return id;

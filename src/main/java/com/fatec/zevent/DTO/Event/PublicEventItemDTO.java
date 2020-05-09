@@ -1,5 +1,7 @@
 package com.fatec.zevent.DTO.Event;
 
+import com.fatec.zevent.model.Address;
+
 import java.util.Date;
 
 public class PublicEventItemDTO {

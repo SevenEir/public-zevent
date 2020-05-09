@@ -1,15 +1,16 @@
-package com.fatec.zevent.controller;
+package com.fatec.zevent.service.impl;
 
 import com.fatec.zevent.DAO.EventDAO;
-import com.fatec.zevent.DTO.StandToAddDTO;
+import com.fatec.zevent.DTO.Stand.StandToAddDTO;
 import com.fatec.zevent.model.Event;
+import com.fatec.zevent.service.IStandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class StandController {
+public class StandServiceImpl implements IStandService {
 
     @Autowired
     private EventDAO eventRepository;

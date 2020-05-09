@@ -1,21 +1,19 @@
-package com.fatec.zevent.controller;
+package com.fatec.zevent.service.impl;
 
 import com.fatec.zevent.DAO.EventDAO;
 import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
-import com.fatec.zevent.model.Activity;
 import com.fatec.zevent.model.Event;
-import com.fatec.zevent.model.enumeration.EventStatusEnum;
 import com.fatec.zevent.model.enumeration.EventTypeEnum;
+import com.fatec.zevent.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EventController {
+public class EventServiceImpl implements IEventService {
 
     @Autowired
     private EventDAO repository;
@@ -29,11 +27,7 @@ public class EventController {
     }
 
     public Event createEvent(Event event) {
-        event.setStatus(EventStatusEnum.OPEN);
         //TODO: Aqui vai precisar ser setado o usuário responsavel, que será o logado a partir do token
-        event.setStands(new ArrayList<>());
-        event.setActivityTypes(new ArrayList<>());
-        event.setComments(new ArrayList<>());
         repository.save(event);
         return event;
     }

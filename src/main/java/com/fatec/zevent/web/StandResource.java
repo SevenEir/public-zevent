@@ -1,7 +1,7 @@
 package com.fatec.zevent.web;
 
-import com.fatec.zevent.DTO.StandToAddDTO;
-import com.fatec.zevent.controller.StandController;
+import com.fatec.zevent.DTO.Stand.StandToAddDTO;
+import com.fatec.zevent.service.IStandService;
 import com.fatec.zevent.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +19,7 @@ import java.net.URISyntaxException;
 public class StandResource {
 
     @Autowired
-    private final StandController standController;
-
-    public StandResource(StandController standController) {
-        this.standController = standController;
-    }
+    private IStandService standService;
 
     /**
      * {@code POST  /stand} : create new stand.
@@ -32,7 +28,7 @@ public class StandResource {
      */
     @PostMapping("/stand")
     public ResponseEntity<Event> createStand(@Valid @RequestBody StandToAddDTO standToAddDTO) throws URISyntaxException {
-        Event event = standController.addStandToEvent(standToAddDTO);
+        Event event = standService.addStandToEvent(standToAddDTO);
         if(event == null) {
             return ResponseEntity.badRequest().body(event);
         } else {

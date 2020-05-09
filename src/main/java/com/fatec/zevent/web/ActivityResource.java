@@ -1,8 +1,8 @@
 package com.fatec.zevent.web;
 
 import com.fatec.zevent.DTO.Activity.ActivityToAddDTO;
-import com.fatec.zevent.controller.ActivityController;
 import com.fatec.zevent.model.Event;
+import com.fatec.zevent.service.IActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +19,7 @@ import java.net.URISyntaxException;
 public class ActivityResource {
 
     @Autowired
-    private final ActivityController activityController;
-
-
-    public ActivityResource(ActivityController activityController) {
-        this.activityController = activityController;
-    }
+    private IActivityService activityService;
 
     /**
      * {@code POST  /activity} : create new activity.
@@ -33,7 +28,7 @@ public class ActivityResource {
      */
     @PostMapping("/activity")
     public ResponseEntity<Event> createActivity(@Valid @RequestBody ActivityToAddDTO activityToAddDTO) throws URISyntaxException {
-        Event event = activityController.addActivityToEvent(activityToAddDTO);
+        Event event = activityService.addActivityToEvent(activityToAddDTO);
         if(event == null) {
             return ResponseEntity.badRequest().body(event);
         } else {
