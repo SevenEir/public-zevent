@@ -5,16 +5,12 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fatec.zevent.model.enumeration.CategoryEnum;
 import com.fatec.zevent.model.enumeration.EventStatusEnum;
 import com.fatec.zevent.model.enumeration.EventTypeEnum;
-import com.mongodb.lang.NonNull;
-import com.mongodb.lang.Nullable;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Document(collection = "events")
 public class Event implements Checkable {
@@ -59,6 +55,7 @@ public class Event implements Checkable {
     private List<Stand> stands = new ArrayList<>();
     private List<ActivityType> activityTypes = new ArrayList<>();
     private List<Comment> comments = new ArrayList<>();
+    public Set<String> subscribedIds = new HashSet<String>();
 
     public String getId() {
         return id;
@@ -202,5 +199,13 @@ public class Event implements Checkable {
     public Event setComments(List<Comment> comments) {
         this.comments = comments;
         return this;
+    }
+
+    public Set<String> getSubscribedIds() {
+        return subscribedIds;
+    }
+
+    public void setSubscribedIds(Set<String> subscribedIds) {
+        this.subscribedIds = subscribedIds;
     }
 }

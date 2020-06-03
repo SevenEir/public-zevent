@@ -2,7 +2,9 @@ package com.fatec.zevent.model;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Activity implements Checkable {
 
@@ -18,7 +20,9 @@ public class Activity implements Checkable {
     private int seats;
     @NotNull(message = "Activity's points must not be null")
     private int points;
+
     private List<User> responsible;
+    public Set<String> subscribedIds = new HashSet<String>();
 
     public String getName() {
         return name;
@@ -81,5 +85,9 @@ public class Activity implements Checkable {
     public Activity setResponsible(List<User> responsible) {
         this.responsible = responsible;
         return this;
+    }
+
+    public Set<String> getSubscribedIds() {
+        return this.subscribedIds;
     }
 }

@@ -1,10 +1,8 @@
 package com.fatec.zevent.web;
 
-import com.fatec.zevent.DAO.EventDAO;
 import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
 import com.fatec.zevent.service.IEventService;
 import com.fatec.zevent.model.Event;
-import com.fatec.zevent.utils.ObjectGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
