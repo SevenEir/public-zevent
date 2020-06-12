@@ -21,7 +21,7 @@ public class Stand implements Checkable {
     @NotNull(message = "Stand's organization must not be null")
     private Organization organization;
 
-    private User responsible;
+    private String responsibleId;
 
     public String getName() {
         return name;
@@ -50,12 +50,12 @@ public class Stand implements Checkable {
         return this;
     }
 
-    public User getResponsible() {
-        return responsible;
+    public String getResponsible() {
+        return responsibleId;
     }
 
-    public Stand setResponsible(User responsible) {
-        this.responsible = responsible;
+    public Stand setResponsible(String responsibleId) {
+        this.responsibleId = responsibleId;
         return this;
     }
 

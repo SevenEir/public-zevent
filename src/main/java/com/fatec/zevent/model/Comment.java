@@ -2,7 +2,7 @@ package com.fatec.zevent.model;
 
 public class Comment {
     private String text;
-    private User author;
+    private String authorId;
 
     public String getText() {
         return text;
@@ -13,12 +13,12 @@ public class Comment {
         return this;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public Comment setAuthor(User author) {
-        this.author = author;
+    public Comment setAuthorId(String author) {
+        this.authorId = author;
         return this;
     }
 }

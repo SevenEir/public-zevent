@@ -39,6 +39,8 @@ public class User {
     @NotNull(message = "User's address must not be null")
     private Address address;
 
+    private List<String> subscribedEventsIds = new ArrayList<String>();
+
     public String getName() {
         return name;
     }
@@ -107,5 +109,13 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<String> getSubscribedEventsIds() {
+        return subscribedEventsIds;
+    }
+
+    public void setSubscribedEventsIds(List<String> subscribedEventsIds) {
+        this.subscribedEventsIds = subscribedEventsIds;
     }
 }

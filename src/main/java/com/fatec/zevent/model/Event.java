@@ -5,12 +5,16 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fatec.zevent.model.enumeration.CategoryEnum;
 import com.fatec.zevent.model.enumeration.EventStatusEnum;
 import com.fatec.zevent.model.enumeration.EventTypeEnum;
+import com.mongodb.lang.NonNull;
+import com.mongodb.lang.Nullable;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Document(collection = "events")
 public class Event implements Checkable {
@@ -51,11 +55,12 @@ public class Event implements Checkable {
     private Address address;
 
     private EventStatusEnum status = EventStatusEnum.OPEN;
-    private User responsible;
+    private String responsibleId = "";
+    private List<Activity> activities = new ArrayList<>();
     private List<Stand> stands = new ArrayList<>();
     private List<ActivityType> activityTypes = new ArrayList<>();
     private List<Comment> comments = new ArrayList<>();
-    public Set<String> subscribedIds = new HashSet<String>();
+    private List<String> guestsIds = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -156,6 +161,15 @@ public class Event implements Checkable {
         return this;
     }
 
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public Event setActivities(List<Activity> activities) {
+        this.activities = activities;
+        return this;
+    }
+
     public List<Stand> getStands() {
         return stands;
     }
@@ -174,12 +188,12 @@ public class Event implements Checkable {
         return this;
     }
 
-    public User getResponsible() {
-        return responsible;
+    public String getResponsibleId() {
+        return responsibleId;
     }
 
-    public Event setResponsible(User responsible) {
-        this.responsible = responsible;
+    public Event setResponsibleId(String responsibleId) {
+        this.responsibleId = responsibleId;
         return this;
     }
 
@@ -201,11 +215,11 @@ public class Event implements Checkable {
         return this;
     }
 
-    public Set<String> getSubscribedIds() {
-        return subscribedIds;
+    public List<String> getGuestsIds() {
+        return guestsIds;
     }
 
-    public void setSubscribedIds(Set<String> subscribedIds) {
-        this.subscribedIds = subscribedIds;
+    public void setGuestsIds(List<String> guestsIds) {
+        this.guestsIds = guestsIds;
     }
 }

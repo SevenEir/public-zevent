@@ -24,7 +24,7 @@ public class Address {
 
     @NotNull(message = "Organization's number must not be null")
     private String number;
-    private String complement;
+    private String complement = "";
 
     public String getPostalCode() {
         return postalCode;

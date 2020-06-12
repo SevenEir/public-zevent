@@ -1,7 +1,5 @@
 package com.fatec.zevent.web;
 
-import com.fatec.zevent.DAO.UserDAO;
-import com.fatec.zevent.model.Event;
 import com.fatec.zevent.model.User;
 import com.fatec.zevent.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

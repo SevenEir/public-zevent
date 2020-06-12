@@ -2,27 +2,33 @@ package com.fatec.zevent.model;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Activity implements Checkable {
 
     @NotNull(message = "Activity's name must not be null")
     private String name;
+
     @NotNull(message = "Activity's description must not be null")
     private String desc;
-    @NotNull(message = "Activity's initial date must not be null")
+
+    @NotNull(message = "Activity's init date must not be null")
     private Date initDate;
+
     @NotNull(message = "Activity's finish date must not be null")
     private Date finishDate;
+
     @NotNull(message = "Activity's seats must not be null")
     private int seats;
+
     @NotNull(message = "Activity's points must not be null")
     private int points;
 
-    private List<User> responsible;
-    public Set<String> subscribedIds = new HashSet<String>();
+    @NotNull(message = "Activity's type must not be null")
+    private ActivityType type;
+
+    private List<String> responsibleIds;
+    private List<String> guestsId;
 
     public String getName() {
         return name;
@@ -78,16 +84,28 @@ public class Activity implements Checkable {
         return this;
     }
 
-    public List<User> getResponsible() {
-        return responsible;
+    public ActivityType getType() {
+        return type;
     }
 
-    public Activity setResponsible(List<User> responsible) {
-        this.responsible = responsible;
+    public Activity setType(ActivityType type) {
+        this.type = type;
         return this;
     }
 
-    public Set<String> getSubscribedIds() {
-        return this.subscribedIds;
+    public List<String> getResponsibleIds() {
+        return responsibleIds;
+    }
+
+    public void setResponsibleIds(List<String> responsibleIds) {
+        this.responsibleIds = responsibleIds;
+    }
+
+    public List<String> getGuestsId() {
+        return guestsId;
+    }
+
+    public void setGuestsId(List<String> guestsId) {
+        this.guestsId = guestsId;
     }
 }

@@ -3,6 +3,7 @@ package com.fatec.zevent.service.impl;
 import com.fatec.zevent.DAO.EventDAO;
 import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
 import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.enumeration.EventStatusEnum;
 import com.fatec.zevent.model.enumeration.EventTypeEnum;
 import com.fatec.zevent.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;

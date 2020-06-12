@@ -19,7 +19,8 @@ public class ActivityServiceImpl implements IActivityService {
     @Override
     public Event addActivityToEvent(ActivityToAddDTO activityToAddDTO) {
         Optional<Event> event = eventRepository.findById(activityToAddDTO.getEventId());
-        activityToAddDTO.getActivity().setResponsible(new ArrayList<>());
+        activityToAddDTO.getActivity().setResponsibleIds(new ArrayList<>());
+        activityToAddDTO.getActivity().setGuestsId(new ArrayList<>());
         if(event.isPresent()) {
             event.get().getActivityTypes().forEach(activityType -> {
                 if(activityType.getName().equals(activityToAddDTO.getActivityTypeName())) {
