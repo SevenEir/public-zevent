@@ -1,7 +1,5 @@
 package com.fatec.zevent.model;
 
-import org.springframework.data.annotation.Id;
-
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
