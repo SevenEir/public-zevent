@@ -1,11 +1,23 @@
 package com.fatec.zevent.DTO.Event;
 
+import com.fatec.zevent.model.Address;
+
 import java.util.Date;
 
 public class PublicEventItemDTO {
+
+    private String id;
     private String name;
     private Date initDate;
     private int seats;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

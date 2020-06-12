@@ -1,13 +1,14 @@
 package com.fatec.zevent.model;
 
-import com.fatec.zevent.model.enumeration.CheckpointType;
+import com.fatec.zevent.model.enumeration.CheckpointTypeEnum;
 
 import java.util.Date;
 
 public class Checkpoint {
+    private String id;
     private Date date;
-    private CheckpointType type;
-    private User user;
+    private CheckpointTypeEnum type;
+    private String userId;
     private Checkable local;
 
     public Date getDate() {
@@ -19,21 +20,21 @@ public class Checkpoint {
         return this;
     }
 
-    public CheckpointType getType() {
+    public CheckpointTypeEnum getType() {
         return type;
     }
 
-    public Checkpoint setType(CheckpointType type) {
+    public Checkpoint setType(CheckpointTypeEnum type) {
         this.type = type;
         return this;
     }
 
-    public User getUser() {
-        return user;
+    public String getUser() {
+        return userId;
     }
 
-    public Checkpoint setUser(User user) {
-        this.user = user;
+    public Checkpoint setUser(String userId) {
+        this.userId = userId;
         return this;
     }
 

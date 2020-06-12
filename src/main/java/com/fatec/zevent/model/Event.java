@@ -5,15 +5,12 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fatec.zevent.model.enumeration.CategoryEnum;
 import com.fatec.zevent.model.enumeration.EventStatusEnum;
 import com.fatec.zevent.model.enumeration.EventTypeEnum;
-import com.mongodb.lang.NonNull;
-import com.mongodb.lang.Nullable;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Document(collection = "events")
 public class Event implements Checkable {
@@ -53,12 +50,12 @@ public class Event implements Checkable {
     @NotNull(message = "Event's address must not be null")
     private Address address;
 
-    private EventStatusEnum status;
+    private EventStatusEnum status = EventStatusEnum.OPEN;
     private User responsible;
-    private List<Activity> activities;
-    private List<Stand> stands;
-    private List<ActivityType> activityTypes;
-    private List<Comment> comments;
+    private List<Stand> stands = new ArrayList<>();
+    private List<ActivityType> activityTypes = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
+    public Set<String> subscribedIds = new HashSet<String>();
 
     public String getId() {
         return id;
@@ -159,15 +156,6 @@ public class Event implements Checkable {
         return this;
     }
 
-    public List<Activity> getActivities() {
-        return activities;
-    }
-
-    public Event setActivities(List<Activity> activities) {
-        this.activities = activities;
-        return this;
-    }
-
     public List<Stand> getStands() {
         return stands;
     }
@@ -211,5 +199,13 @@ public class Event implements Checkable {
     public Event setComments(List<Comment> comments) {
         this.comments = comments;
         return this;
+    }
+
+    public Set<String> getSubscribedIds() {
+        return subscribedIds;
+    }
+
+    public void setSubscribedIds(Set<String> subscribedIds) {
+        this.subscribedIds = subscribedIds;
     }
 }

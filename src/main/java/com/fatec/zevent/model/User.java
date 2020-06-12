@@ -6,6 +6,8 @@ import com.fatec.zevent.model.enumeration.GenderEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,15 +17,27 @@ public class User {
     @JsonSerialize(using = ToStringSerializer.class)
     @Id
     private String id;
+
+    @NotNull(message = "User's name must not be null")
     private String name;
+
+    @NotNull(message = "User's birthday must not be null")
     private Date birthday;
+
+    @NotNull(message = "User's role must not be null")
     private String role;
+
+    @NotNull(message = "User's gender must not be null")
     private GenderEnum gender;
-    private int phone;
+
+    @NotNull(message = "User's phone must not be null")
+    private String phone;
+
+    @NotNull(message = "User's email must not be null")
     private String email;
-    private List<Event> subscribedEvents;
-    private List<Activity> subscribedActivities;
-    private List<Checkpoint> checkpoints;
+
+    @NotNull(message = "User's address must not be null")
+    private Address address;
 
     public String getName() {
         return name;
@@ -61,11 +75,11 @@ public class User {
         return this;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public User setPhone(int phone) {
+    public User setPhone(String phone) {
         this.phone = phone;
         return this;
     }
@@ -79,30 +93,19 @@ public class User {
         return this;
     }
 
-    public List<Event> getSubscribedEvents() {
-        return subscribedEvents;
+    public String getId() {
+        return id;
     }
 
-    public User setSubscribedEvents(List<Event> subscribedEvents) {
-        this.subscribedEvents = subscribedEvents;
-        return this;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public List<Activity> getSubscribedActivities() {
-        return subscribedActivities;
+    public Address getAddress() {
+        return address;
     }
 
-    public User setSubscribedActivities(List<Activity> subscribedActivities) {
-        this.subscribedActivities = subscribedActivities;
-        return this;
-    }
-
-    public List<Checkpoint> getCheckpoints() {
-        return checkpoints;
-    }
-
-    public User setCheckpoints(List<Checkpoint> checkpoints) {
-        this.checkpoints = checkpoints;
-        return this;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

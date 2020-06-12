@@ -1,5 +1,5 @@
 package com.fatec.zevent.model.enumeration;
 
-public enum CheckpointType {
+public enum CheckpointTypeEnum {
     INPUT, OUTPUT, VISIT
 }
