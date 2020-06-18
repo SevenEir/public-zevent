@@ -1,4 +1,4 @@
-package com.fatec.zevent.web;
+package com.fatec.zevent.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
