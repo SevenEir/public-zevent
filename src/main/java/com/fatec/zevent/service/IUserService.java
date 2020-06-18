@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface IUserService {
     public User createUser(User user);
     public Optional<User> getUserById(String id);
+    public Optional<User> getUserByEmail(String email);
 }

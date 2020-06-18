@@ -35,7 +35,9 @@ public class User {
 
     @NotNull(message = "User's email must not be null")
     private String email;
-
+    
+    @NotNull(message = "User's password must not be null")
+    private String password;
     @NotNull(message = "User's address must not be null")
     private Address address;
 
@@ -95,7 +97,15 @@ public class User {
         return this;
     }
 
-    public String getId() {
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getId() {
         return id;
     }
 
