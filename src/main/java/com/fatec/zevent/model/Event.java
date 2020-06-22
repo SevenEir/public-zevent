@@ -54,6 +54,9 @@ public class Event implements Checkable {
     @NotNull(message = "Event's address must not be null")
     private Address address;
 
+    @NotNull(message = "Event's image url must not be null")
+    private String imageUrl;
+
     private EventStatusEnum status = EventStatusEnum.OPEN;
     private String responsibleId = "";
     private List<Activity> activities = new ArrayList<>();
@@ -221,5 +224,13 @@ public class Event implements Checkable {
 
     public void setGuestsIds(List<String> guestsIds) {
         this.guestsIds = guestsIds;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

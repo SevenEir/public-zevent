@@ -10,6 +10,7 @@ public class PublicEventItemDTO {
     private String name;
     private Date initDate;
     private int seats;
+    private String imageUrl;
 
     public String getId() {
         return id;
@@ -44,5 +45,13 @@ public class PublicEventItemDTO {
     public PublicEventItemDTO setSeats(int seats) {
         this.seats = seats;
         return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
