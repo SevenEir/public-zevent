@@ -2,7 +2,7 @@ package com.fatec.zevent.web;
 
 import com.fatec.zevent.DTO.ActivityType.ActivityTypeToAddDTO;
 import com.fatec.zevent.service.IActivityTypeService;
-import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +27,9 @@ public class ActivityTypeResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and the activity type created.
      */
     @PostMapping("/activity-type")
-    public ResponseEntity<Event> createActivityType(@Valid @RequestBody ActivityTypeToAddDTO activityTypeToAddDTO) throws URISyntaxException {
-        Event event = activityTypeService.addActivityTypeToEvent(activityTypeToAddDTO);
-        return ResponseEntity.created(new URI("/api/event/" + event.getId())).body(event);
+    public ResponseEntity<Evento> createActivityType(@Valid @RequestBody ActivityTypeToAddDTO activityTypeToAddDTO) throws URISyntaxException {
+        Evento evento = activityTypeService.addActivityTypeToEvent(activityTypeToAddDTO);
+        return ResponseEntity.created(new URI("/api/event/" + evento.getId())).body(evento);
     }
 
 }

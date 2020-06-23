@@ -2,13 +2,10 @@ package com.fatec.zevent.service.impl;
 
 import com.fatec.zevent.DAO.EventDAO;
 import com.fatec.zevent.DTO.Activity.ActivityToAddDTO;
-import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.Evento;
 import com.fatec.zevent.service.IActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class ActivityServiceImpl implements IActivityService {
@@ -17,7 +14,8 @@ public class ActivityServiceImpl implements IActivityService {
     private EventDAO eventRepository;
 
     @Override
-    public Event addActivityToEvent(ActivityToAddDTO activityToAddDTO) {
+    public Evento addActivityToEvent(ActivityToAddDTO activityToAddDTO) {
+        /*
         Optional<Event> event = eventRepository.findById(activityToAddDTO.getEventId());
         activityToAddDTO.getActivity().setResponsibleIds(new ArrayList<>());
         activityToAddDTO.getActivity().setGuestsId(new ArrayList<>());
@@ -29,7 +27,7 @@ public class ActivityServiceImpl implements IActivityService {
                 }
             });
             return event.get();
-        }
+        }*/
         return null;
     }
 

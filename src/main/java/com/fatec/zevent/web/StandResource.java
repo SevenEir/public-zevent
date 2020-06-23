@@ -2,7 +2,7 @@ package com.fatec.zevent.web;
 
 import com.fatec.zevent.DTO.Stand.StandToAddDTO;
 import com.fatec.zevent.service.IStandService;
-import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,12 +27,12 @@ public class StandResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and the stand created.
      */
     @PostMapping("/stand")
-    public ResponseEntity<Event> createStand(@Valid @RequestBody StandToAddDTO standToAddDTO) throws URISyntaxException {
-        Event event = standService.addStandToEvent(standToAddDTO);
-        if(event == null) {
-            return ResponseEntity.badRequest().body(event);
+    public ResponseEntity<Evento> createStand(@Valid @RequestBody StandToAddDTO standToAddDTO) throws URISyntaxException {
+        Evento evento = standService.addStandToEvent(standToAddDTO);
+        if(evento == null) {
+            return ResponseEntity.badRequest().body(evento);
         } else {
-            return ResponseEntity.created(new URI("/api/event/" + event.getId())).body(event);
+            return ResponseEntity.created(new URI("/api/event/" + evento.getId())).body(evento);
         }
     }
 }

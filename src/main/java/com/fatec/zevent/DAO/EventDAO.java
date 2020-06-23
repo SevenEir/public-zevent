@@ -1,14 +1,8 @@
 package com.fatec.zevent.DAO;
 
-import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
-import com.fatec.zevent.model.Event;
-import com.fatec.zevent.model.enumeration.EventTypeEnum;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import com.fatec.zevent.model.Evento;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+public interface EventDAO extends CrudRepository<Evento, Integer> {
 
-@Repository
-public interface EventDAO extends MongoRepository<Event, String> {
-    public List<PublicEventItemDTO> findByType(EventTypeEnum type);
 }

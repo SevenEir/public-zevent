@@ -1,8 +1,8 @@
 package com.fatec.zevent.service;
 
 import com.fatec.zevent.DTO.Stand.StandToAddDTO;
-import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.Evento;
 
 public interface IStandService {
-    public Event addStandToEvent(StandToAddDTO standToAddDTO);
+    public Evento addStandToEvent(StandToAddDTO standToAddDTO);
 }

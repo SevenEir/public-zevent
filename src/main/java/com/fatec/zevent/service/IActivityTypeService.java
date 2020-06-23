@@ -1,8 +1,8 @@
 package com.fatec.zevent.service;
 
 import com.fatec.zevent.DTO.ActivityType.ActivityTypeToAddDTO;
-import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.Evento;
 
 public interface IActivityTypeService {
-    public Event addActivityTypeToEvent(ActivityTypeToAddDTO activityTypeToAddDTO);
+    public Evento addActivityTypeToEvent(ActivityTypeToAddDTO activityTypeToAddDTO);
 }

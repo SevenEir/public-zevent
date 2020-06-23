@@ -1,13 +1,12 @@
 package com.fatec.zevent.service;
 
-import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
-import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.Evento;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IEventService {
-    public List<PublicEventItemDTO> getAllPublicEvents();
-    public Event createEvent(Event event);
-    public Optional<Event> getEventById(String id);
+    public List<Evento> getAllPublicEvents();
+    public Evento createEvent(Evento evento);
+    public Optional<Evento> getEventById(String id);
 }

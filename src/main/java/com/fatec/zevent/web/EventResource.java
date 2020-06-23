@@ -1,8 +1,7 @@
 package com.fatec.zevent.web;
 
-import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
 import com.fatec.zevent.service.IEventService;
-import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +26,10 @@ public class EventResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of public events in body.
      */
     @GetMapping("/public-event")
-    public ResponseEntity<List<PublicEventItemDTO>> getAllPublicEvents() {
+    public ResponseEntity<List<Evento>> getAllPublicEvents() {
         System.out.println("REST request to get all the public events");
-        List<PublicEventItemDTO> events = eventService.getAllPublicEvents();
-        return ResponseEntity.ok().body(events);
+        List<Evento> eventos = eventService.getAllPublicEvents();
+        return ResponseEntity.ok().body(eventos);
     }
 
     /**
@@ -39,12 +38,12 @@ public class EventResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and the event created.
      */
     @PostMapping("/event")
-    public ResponseEntity<Event> createEvent(@Valid @RequestBody Event event) throws URISyntaxException {
-        if(event.getId() != null) {
-            return ResponseEntity.badRequest().body(event);
-        }
-        Event savedEvent = eventService.createEvent(event);
-        return ResponseEntity.created(new URI("/api/event/" + savedEvent.getId())).body(savedEvent);
+    public ResponseEntity<Evento> createEvent(@Valid @RequestBody Evento evento) throws URISyntaxException {
+        //if(event.getId() != null) {
+        //    return ResponseEntity.badRequest().body(event);
+        //}
+        Evento savedEvento = eventService.createEvent(evento);
+        return ResponseEntity.created(new URI("/api/event/" + savedEvento.getId())).body(savedEvento);
     }
 
     /**
@@ -53,9 +52,9 @@ public class EventResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the event detail.
      */
     @GetMapping("/public-event/{id}")
-    public ResponseEntity<Event> getEventById(@PathVariable String id) {
+    public ResponseEntity<Evento> getEventById(@PathVariable String id) {
         System.out.println("REST request to get event detail");
-        Optional<Event> event = eventService.getEventById(id);
+        Optional<Evento> event = eventService.getEventById(id);
         return event.map(value -> ResponseEntity.ok().body(value))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
