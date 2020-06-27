@@ -1,15 +1,22 @@
 package com.fatec.zevent.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.fatec.zevent.model.enumeration.GenderEnum;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fatec.zevent.model.enumeration.GenderEnum;
 
 @Document(collection = "users")
 public class User {
@@ -34,6 +41,7 @@ public class User {
     private String phone;
 
     @NotNull(message = "User's email must not be null")
+    @Column(unique = true)
     private String email;
     
     @NotNull(message = "User's password must not be null")
@@ -42,6 +50,13 @@ public class User {
     private Address address;
 
     private List<String> subscribedEventsIds = new ArrayList<String>();
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="user_role",
+            joinColumns=@JoinColumn(name="user_id"),
+            inverseJoinColumns=@JoinColumn(name="role_id")
+    )
+    private List<Role> roles;
 
     public String getName() {
         return name;
@@ -128,4 +143,13 @@ public class User {
     public void setSubscribedEventsIds(List<String> subscribedEventsIds) {
         this.subscribedEventsIds = subscribedEventsIds;
     }
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+    
 }
