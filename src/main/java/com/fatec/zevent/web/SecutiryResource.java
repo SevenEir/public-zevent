@@ -34,6 +34,7 @@ public class SecutiryResource {
 	private UserDAO userDao;
 	@GetMapping("/boca-de-lata")
 	public ResponseEntity<RoleEnum> carregarBanco() {
+		/*
 		User user = new User();
 		user.setName("Blade Runner");
 		user.setRole(RoleEnum.ADMIN);
@@ -45,6 +46,8 @@ public class SecutiryResource {
 		user.setAddress(new Address());
 		userDao.save(user);
 		return new ResponseEntity<RoleEnum>(HttpStatus.OK);
+	 	*/
+		return null;
 	}
 
 	@RequestMapping(value = "/user-auth", method = RequestMethod.GET)

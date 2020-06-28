@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,9 +27,6 @@ public class User {
     @NotNull(message = "User's birthday must not be null")
     private Date birthday;
 
-    @NotNull(message = "User's role must not be null")
-    private String role;
-
     @NotNull(message = "User's gender must not be null")
     private GenderEnum gender;
 
@@ -41,7 +34,8 @@ public class User {
     private String phone;
 
     @NotNull(message = "User's email must not be null")
-    @Column(unique = true)
+//    @Column(unique = true)
+//    @Indexed(unique=true)
     private String email;
     
     @NotNull(message = "User's password must not be null")
@@ -51,11 +45,13 @@ public class User {
 
     private List<String> subscribedEventsIds = new ArrayList<String>();
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="user_role",
-            joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id")
-    )
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name="user_role",
+//            joinColumns=@JoinColumn(name="user_id"),
+//            inverseJoinColumns=@JoinColumn(name="role_id")
+//    )
+
+    @NotNull(message = "User's role must not be null")
     private List<Role> roles;
 
     public String getName() {
@@ -73,15 +69,6 @@ public class User {
 
     public User setBirthday(Date birthday) {
         this.birthday = birthday;
-        return this;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public User setRole(String role) {
-        this.role = role;
         return this;
     }
 

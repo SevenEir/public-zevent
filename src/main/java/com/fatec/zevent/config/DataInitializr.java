@@ -31,10 +31,9 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
-
+	/*
     	User user = new User();
 		user.setName("Blade Runner");
-		user.setRole(RoleEnum.ADMIN);
 		user.setBirthday(new Date());
 		user.setGender(GenderEnum.MALE);
 		user.setPhone("1222121");
@@ -42,6 +41,7 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
 		user.setPassword(passwordEncoder.encode("123456"));
 		user.setAddress(new Address());
 		userRepository.save(user);
+		*/
     }
 
 

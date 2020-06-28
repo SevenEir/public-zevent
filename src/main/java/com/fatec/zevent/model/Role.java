@@ -1,7 +1,6 @@
 package com.fatec.zevent.model;
 
-import javax.persistence.Entity;
-
+import com.fatec.zevent.model.enumeration.RoleEnum;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,12 +9,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Entity
 @Getter
 @Setter
 public class Role implements GrantedAuthority{
 	
-    public Role(String name) {
+    public Role(RoleEnum name) {
         this.name = name;
     }
     public Role() {
@@ -24,12 +22,12 @@ public class Role implements GrantedAuthority{
 
     @Id
     private ObjectId id;
-    private String name;
+    private RoleEnum name;
 	
     
     @Override
 	public String getAuthority() {
-        return  this.name;
+        return  this.name.toString();
 	}
 
 
