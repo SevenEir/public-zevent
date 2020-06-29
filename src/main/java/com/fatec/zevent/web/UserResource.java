@@ -44,4 +44,5 @@ public class UserResource {
         return user.map(value -> ResponseEntity.ok().body(value))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
+    
 }

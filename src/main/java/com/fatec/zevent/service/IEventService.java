@@ -10,4 +10,6 @@ public interface IEventService {
     public List<PublicEventItemDTO> getAllPublicEvents();
     public Event createEvent(Event event);
     public Optional<Event> getEventById(String id);
+    public boolean subscribeEvent(String id);
+    public boolean deleteEvent(String id);
 }
