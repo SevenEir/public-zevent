@@ -1,6 +1,7 @@
 package com.fatec.zevent.service.impl;
 
 import com.fatec.zevent.DAO.UserDAO;
+import com.fatec.zevent.model.Role;
 import com.fatec.zevent.model.User;
 import com.fatec.zevent.model.enumeration.RoleEnum;
 import com.fatec.zevent.service.IUserDetailsService;
@@ -21,14 +22,14 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
     UserDAO repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User dbUser = this.repository.findByEmail(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User dbUser = this.repository.findByEmail(email);
 
         if (dbUser != null) {
             Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-            for (RoleEnum role : dbUser.getRoles()) {
-                GrantedAuthority authority = new SimpleGrantedAuthority(role.toString());
+            for (Role role : dbUser.getRoles()) {
+                GrantedAuthority authority = new SimpleGrantedAuthority(role.getAuthority());
                 grantedAuthorities.add(authority);
             }
 
@@ -36,7 +37,7 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
                     dbUser.getEmail(), dbUser.getPassword(), grantedAuthorities);
             return user;
         } else {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
+            throw new UsernameNotFoundException(String.format("User '%s' not found", email));
         }
     }
 

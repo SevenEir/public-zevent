@@ -27,7 +27,7 @@ public class User {
     private Date birthday;
 
     @NotNull(message = "User's role must not be null")
-    private List<RoleEnum> roles;
+    private List<Role> roles;
 
     @NotNull(message = "User's gender must not be null")
     private GenderEnum gender;
@@ -64,11 +64,11 @@ public class User {
         return this;
     }
 
-    public List<RoleEnum> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public User setRoles(List<RoleEnum> role) {
+    public User setRoles(List<Role> role) {
         this.roles = role;
         return this;
     }

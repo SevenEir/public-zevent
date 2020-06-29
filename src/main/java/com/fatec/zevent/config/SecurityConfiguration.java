@@ -1,5 +1,6 @@
 package com.fatec.zevent.config;
 
+import com.fatec.zevent.model.enumeration.RoleEnum;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +18,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/oauth/token").permitAll();
+        http
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                .antMatchers("/oauth/token").permitAll();
     }
 
     @Bean

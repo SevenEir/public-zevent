@@ -1,11 +1,14 @@
 package com.fatec.zevent.web;
 
 import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
+import com.fatec.zevent.model.enumeration.RoleEnum;
 import com.fatec.zevent.service.IEventService;
 import com.fatec.zevent.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,6 +29,8 @@ public class EventResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of public events in body.
      */
+
+    //@PreAuthorize("hasAuthority(\"" + RoleEnum.ADMIN + "\")")
     @GetMapping("/public-event")
     public ResponseEntity<List<PublicEventItemDTO>> getAllPublicEvents() {
         System.out.println("REST request to get all the public events");
