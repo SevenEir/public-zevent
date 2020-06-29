@@ -1,8 +1,10 @@
 package com.fatec.zevent.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fatec.zevent.model.enumeration.GenderEnum;
+import com.fatec.zevent.model.enumeration.RoleEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,7 +27,7 @@ public class User {
     private Date birthday;
 
     @NotNull(message = "User's role must not be null")
-    private String role;
+    private List<RoleEnum> roles;
 
     @NotNull(message = "User's gender must not be null")
     private GenderEnum gender;
@@ -35,6 +37,9 @@ public class User {
 
     @NotNull(message = "User's email must not be null")
     private String email;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
     @NotNull(message = "User's address must not be null")
     private Address address;
@@ -59,12 +64,12 @@ public class User {
         return this;
     }
 
-    public String getRole() {
-        return role;
+    public List<RoleEnum> getRoles() {
+        return roles;
     }
 
-    public User setRole(String role) {
-        this.role = role;
+    public User setRoles(List<RoleEnum> role) {
+        this.roles = role;
         return this;
     }
 
@@ -118,4 +123,19 @@ public class User {
     public void setSubscribedEventsIds(List<String> subscribedEventsIds) {
         this.subscribedEventsIds = subscribedEventsIds;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name=" + name + ", username=" + email + ", password=" + password + ", roles="
+                + roles.toString() + "]";
+    }
+
 }
