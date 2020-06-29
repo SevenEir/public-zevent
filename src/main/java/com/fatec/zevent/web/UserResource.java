@@ -3,8 +3,7 @@ package com.fatec.zevent.web;
 import com.fatec.zevent.model.User;
 import com.fatec.zevent.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
