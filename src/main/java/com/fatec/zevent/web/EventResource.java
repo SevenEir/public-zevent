@@ -1,5 +1,6 @@
 package com.fatec.zevent.web;
 
+import com.fatec.zevent.DAO.EventDAO;
 import com.fatec.zevent.service.IEventService;
 import com.fatec.zevent.model.Evento;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,19 @@ public class EventResource {
     @GetMapping("/public-event/{id}")
     public ResponseEntity<Evento> getEventById(@PathVariable String id) {
         System.out.println("REST request to get event detail");
-        Optional<Evento> event = eventService.getEventById(id);
-        return event.map(value -> ResponseEntity.ok().body(value))
-                .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+        Evento event = eventService.findPublicEventById(id);
+        return ResponseEntity.ok().body(event);
+    }
+
+    @DeleteMapping("/event/{id}")
+    public ResponseEntity<Evento> deleteEventById(@PathVariable int id) {
+        eventService.deleteEvent(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/event/{id}")
+    public ResponseEntity<Evento> setEventPrivate(@PathVariable int id) {
+        eventService.setEventPrivate(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

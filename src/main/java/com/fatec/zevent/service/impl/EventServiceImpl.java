@@ -18,7 +18,7 @@ public class EventServiceImpl implements IEventService {
 
     public List<Evento> getAllPublicEvents() {
         List<Evento> publicEventos = new ArrayList<>();
-        for(Evento evento : repository.findAll()) {
+        for(Evento evento : repository.findAllPublicEvents()) {
             publicEventos.add(evento);
         }
         return publicEventos;
@@ -30,9 +30,19 @@ public class EventServiceImpl implements IEventService {
         return evento;
     }
 
-    public Optional<Evento> getEventById(String id) {
-        //return repository.findById(id);
-        return null;
+    @Override
+    public Evento findPublicEventById(String id) {
+        return repository.findPublicEventById(id);
+    }
+
+    @Override
+    public void deleteEvent(int id) {
+        repository.deleteEvent(Integer.toString(id));
+    }
+
+    @Override
+    public void setEventPrivate(int eventId) {
+        repository.setEventPrivate(Integer.toString(eventId));
     }
 
 }
