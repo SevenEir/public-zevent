@@ -1,5 +1,6 @@
 package com.fatec.zevent.web;
 
+import com.fatec.zevent.config.SecurityConfiguration;
 import com.fatec.zevent.model.User;
 import com.fatec.zevent.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,13 @@ public class UserResource {
         return user.map(value -> ResponseEntity.ok().body(value))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
+    
+    
+    @GetMapping("/user/get-actual-user")
+    public ResponseEntity<User> getUserLogged(){
+    	User user = userService.getUserByEmail(SecurityConfiguration.gettingActualUser());
+    return ResponseEntity.ok().body(user);
+    }
+    
     
 }
