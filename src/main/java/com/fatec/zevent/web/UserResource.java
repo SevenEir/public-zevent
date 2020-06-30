@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -25,12 +28,18 @@ public class UserResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and the user created.
      */
     @PostMapping("/user")
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) throws URISyntaxException {
-        if(user.getId() != null) {
-            return ResponseEntity.badRequest().body(user);
+    public ResponseEntity<Map<String, Object>> createUser(@Valid @RequestBody User user) throws URISyntaxException {
+        Map<String, Object> response = new HashMap<String, Object>();
+    	if(user.getId() != null) {
+    		response.put("status_code", 400);
+        	response.put("status_message", "Ocorreu um erro ao fazer a requisição");
+            return ResponseEntity.badRequest().body(response);
         }
         User savedUser = userService.createUser(user);
-        return ResponseEntity.created(new URI("/api/event/" + savedUser.getId())).body(savedUser);
+     	response.put("data", savedUser);
+    	response.put("status", 200);
+    	response.put("status_message", "OK");
+        return ResponseEntity.created(new URI("/api/event/" + savedUser.getId())).body(response);
     }
 
     /**
@@ -45,13 +54,13 @@ public class UserResource {
         return user.map(value -> ResponseEntity.ok().body(value))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
-    
-    
+
+
     @GetMapping("/user/get-actual-user")
     public ResponseEntity<User> getUserLogged(){
     	User user = userService.getUserByEmail(SecurityConfiguration.gettingActualUser());
     return ResponseEntity.ok().body(user);
     }
-    
-    
+
+
 }

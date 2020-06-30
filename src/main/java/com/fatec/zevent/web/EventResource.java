@@ -1,11 +1,10 @@
 package com.fatec.zevent.web;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
+import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
+import com.fatec.zevent.model.enumeration.RoleEnum;
+import com.fatec.zevent.service.IEventService;
+import com.fatec.zevent.model.Event;
+import com.fatec.zevent.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
-import com.fatec.zevent.model.Event;
-import com.fatec.zevent.model.enumeration.RoleEnum;
-import com.fatec.zevent.service.IEventService;
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -39,10 +41,23 @@ public class EventResource {
 
     //@PreAuthorize("hasAuthority(\'" + RoleEnum.ADMIN + "\')")
     @GetMapping("/public-event")
-    public ResponseEntity<List<PublicEventItemDTO>> getAllPublicEvents() {
-        System.out.println("REST request to get all the public events");
+    public ResponseEntity<Map<String, Object>> getAllPublicEvents() {
+        System.out.println("REST request to get this the public events");
         List<PublicEventItemDTO> events = eventService.getAllPublicEvents();
-        return ResponseEntity.ok().body(events);
+
+        Map<String, Object> response = new HashMap<String, Object>();
+
+        if(events.isEmpty()) {
+        	response.put("status_code", 401);
+        	response.put("status_message", "Nada foi encontrado");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+    	response.put("data", events);
+    	response.put("status", 200);
+    	response.put("status_message", "OK");
+
+        return ResponseEntity.ok().body(response);
     }
 
     /**
@@ -51,12 +66,19 @@ public class EventResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and the event created.
      */
     @PostMapping("/event")
-    public ResponseEntity<Event> createEvent(@Valid @RequestBody Event event) throws URISyntaxException {
+    public ResponseEntity<Map<String, Object>> createEvent(@Valid @RequestBody Event event) throws URISyntaxException {
+        Map<String, Object> response = new HashMap<String, Object>();
         if(event.getId() != null) {
-            return ResponseEntity.badRequest().body(event);
+        	response.put("status_code", 400);
+        	response.put("status_message", "Ocorreu um erro ao fazer a requisição");
+        	response.put("data", event);
+            return ResponseEntity.badRequest().body(response);
         }
         Event savedEvent = eventService.createEvent(event);
-        return ResponseEntity.created(new URI("/api/event/" + savedEvent.getId())).body(savedEvent);
+    	response.put("data", savedEvent);
+    	response.put("status", 200);
+    	response.put("status_message", "OK");
+        return ResponseEntity.created(new URI("/api/event/" + savedEvent.getId())).body(response);
     }
 
     /**
@@ -71,11 +93,11 @@ public class EventResource {
         return event.map(value -> ResponseEntity.ok().body(value))
                 .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
-    
+
     @PreAuthorize("hasAuthority(\'" + RoleEnum.USER + "\')")
     @PostMapping("/event/subscribe/{id}")
     public ResponseEntity<Event> subscribeEvent(@PathVariable String id){
-    	if (eventService.subscribeEvent(id)) 
+    	if (eventService.subscribeEvent(id))
     		return new ResponseEntity<Event>(HttpStatus.OK);
     	else
     		return new ResponseEntity<Event>(HttpStatus.BAD_REQUEST);
@@ -84,7 +106,7 @@ public class EventResource {
     @PreAuthorize("hasAuthority(\'" + RoleEnum.EVENT_ADMIN+"\')")
     @DeleteMapping("/event/{id}")
     public ResponseEntity<Event> removeEvent(@PathVariable String id){
-    	if (eventService.deleteEvent(id)) 
+    	if (eventService.deleteEvent(id))
     		return new ResponseEntity<Event>(HttpStatus.OK);
     	else
     		return new ResponseEntity<Event>(HttpStatus.BAD_REQUEST);
