@@ -1,18 +1,15 @@
 package com.fatec.zevent.web;
 
-<<<<<<< Updated upstream
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
-=======
 import com.fatec.zevent.DTO.Event.PublicEventItemDTO;
 import com.fatec.zevent.model.enumeration.RoleEnum;
 import com.fatec.zevent.service.IEventService;
 import com.fatec.zevent.model.Event;
->>>>>>> Stashed changes
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
