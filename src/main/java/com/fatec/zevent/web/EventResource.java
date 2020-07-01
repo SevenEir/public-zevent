@@ -41,7 +41,6 @@ public class EventResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of public events in body.
      */
 
-    //@PreAuthorize("hasAuthority(\'" + RoleEnum.ADMIN + "\')")
     @GetMapping("/public-event")
     public ResponseEntity<List<PublicEventItemDTO>> getAllPublicEvents() {
         System.out.println("REST request to get all the public events");
